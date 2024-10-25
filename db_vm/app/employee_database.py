@@ -16,8 +16,9 @@ MONGO_DETAILS = "mongodb://localhost:27017"  # Asssuming mongodb is running in l
 
 #MONGO_DETAILS = "mongo-db-url"
 
-#client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS) # Defining the database access client
-client = AsyncIOMotorClient(MONGO_DETAILS)
+client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS) # Defining the database access client
+#client = AsyncIOMotorClient(MONGO_DETAILS)
+client.get_io_loop = asyncio.get_event_loop
 
 database = client.employees_DB # Connecting to the employee_DB database. Change the database name for connecting to another database
 
