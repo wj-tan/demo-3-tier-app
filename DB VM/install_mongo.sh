@@ -19,8 +19,8 @@ sudo systemctl enable mongod
 
 # Import JSON data
 # Replace "/home/user/employee_db" with the actual path to your data file
-sudo mkdir /home/root/employee_db
-DATA_FILE="/home/root/employee_db/MOCK_DATA.json"
+sudo mkdir /root/employee_db
+DATA_FILE="/root/employee_db/MOCK_DATA.json"
 if [ -f "$DATA_FILE" ]; then
   mongoimport --db=employees_DB --collection=employees --file="$DATA_FILE" --jsonArray
 else
