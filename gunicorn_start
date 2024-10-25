@@ -1,0 +1,22 @@
+#!/bin/bash
+
+NAME=fastapi-mongodb-app
+DIR=/home/user/employee_db
+USER=user # This is the user id with which you are installing everything
+GROUP=user
+WORKERS=3
+WORKER_CLASS=uvicorn.workers.UvicornWorker
+BIND=unix:$DIR/run/gunicorn.sock
+LOG_LEVEL=error
+
+cd $DIR
+
+exec gunicorn app:app \
+  --name $NAME \
+  --workers $WORKERS \
+  --worker-class $WORKER_CLASS \
+  --user=$USER \
+  --group=$GROUP \
+  --bind=$BIND \
+  --log-level=$LOG_LEVEL \
+  --log-file=-
