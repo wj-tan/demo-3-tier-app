@@ -1,0 +1,33 @@
+upstream app_server {
+    server unix:/home/user/employee_db/run/gunicorn.sock fail_timeout=0;
+}
+
+server {
+    listen 80;
+    # add here the ip address of your server
+    # or a domain pointing to that ip (like example.com or www.example.com)
+    server_name <Server IP/FQDN>;
+
+    keepalive_timeout 5;
+    client_max_body_size 4G;
+
+    access_log /home/user/employee_db/logs/nginx-access.log;
+    error_log /home/user/employee_db/logs/nginx-error.log;
+
+    location / {
+
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+
+        if (!-f $request_filename) {
+            proxy_pass http://app_server;
+            break;
+        }
+}
+}
+
+
+sudo ln -s /etc/nginx/sites-available/fastapi-mongodb-app /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
