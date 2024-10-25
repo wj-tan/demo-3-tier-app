@@ -19,9 +19,9 @@ sudo systemctl enable mongod
 cd 
 # Import JSON data
 # Replace "/home/user/employee_db" with the actual path to your data file
-sudo cp /root/demo-3-tier-app/DB\ VM/
+#sudo cp /root/demo-3-tier-app/db_vm/MOCK_DATA.json 
 sudo mkdir /root/employee_db
-DATA_FILE="/root/employee_db/MOCK_DATA.json"
+DATA_FILE="/root/demo-3-tier-app/db_vm/MOCK_DATA.json"
 if [ -f "$DATA_FILE" ]; then
   mongoimport --db=employees_DB --collection=employees --file="$DATA_FILE" --jsonArray
 else
