@@ -16,9 +16,10 @@ sudo systemctl daemon-reload
 sudo systemctl start mongod
 sudo systemctl enable mongod
 
-
+cd 
 # Import JSON data
 # Replace "/home/user/employee_db" with the actual path to your data file
+sudo cp /root/demo-3-tier-app/DB\ VM/
 sudo mkdir /root/employee_db
 DATA_FILE="/root/employee_db/MOCK_DATA.json"
 if [ -f "$DATA_FILE" ]; then
