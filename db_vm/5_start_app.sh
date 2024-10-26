@@ -13,13 +13,14 @@ LOG_LEVEL=error
 
 cd $DIR
 
-exec nohup gunicorn app:app \
-  --workers $WORKERS \
-  --worker-class $WORKER_CLASS \
-  --user=$USER \
-  --group=$GROUP \
-  --bind=$BIND \
-  --log-level=$LOG_LEVEL \
-  --log-file=- &
-#nohup gunicorn -k uvicorn.workers.UvicornWorker app:app --bind 0.0.0.0:8000 &
+# exec nohup gunicorn app:app \
+#   --workers $WORKERS \
+#   --worker-class $WORKER_CLASS \
+#   --user=$USER \
+#   --group=$GROUP \
+#   --bind=$BIND \
+#   --log-level=$LOG_LEVEL \
+#   --log-file=- &
+
+nohup gunicorn -k uvicorn.workers.UvicornWorker app:app --bind 0.0.0.0:8000 &
 
