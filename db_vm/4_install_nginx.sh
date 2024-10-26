@@ -7,10 +7,11 @@ sudo apt install -y nginx
 
 # Get the server's IP address
 SERVER_IP=$(hostname -I | awk '{print $1}')
+NGINX_CONF="/etc/nginx/nginx.conf"
+CONFIG_FILE_FOLDER="/etc/nginx/sites-available"
 
 # Create Nginx configuration for FastAPI
 echo "Copying Nginx configuration file..."
-CONFIG_FILE_FOLDER="/etc/nginx/sites-available"
 
 cp /root/demo-3-tier-app/db_vm/fastapi-mongodb-app $CONFIG_FILE_FOLDER/fastapi-mongodb-app
 # sudo bash -c "cat > $CONFIG_FILE <<EOF
@@ -46,8 +47,14 @@ cp /root/demo-3-tier-app/db_vm/fastapi-mongodb-app $CONFIG_FILE_FOLDER/fastapi-m
 # EOF"
 
 # Enable the configuration
+
+
+
+# Use sed to replace 'user www-data;' with 'user root;'
+sed -i 's/^user www-data;/user root;/' "$NGINX_CONF"
+
 echo "Enabling the Nginx configuration..."
-sudo ln -s $CONFIG_FILE_FOLDER/fastapi-mongodb-app $CONFIG_FILE_FOLDER
+sudo ln -s $CONFIG_FILE_FOLDER/fastapi-mongodb-app $
 
 # Test Nginx configuration
 echo "Testing Nginx configuration..."
