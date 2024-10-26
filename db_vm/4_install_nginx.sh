@@ -4,6 +4,7 @@
 echo "Installing Nginx..."
 sudo apt update
 sudo apt install -y nginx
+sudo systemctl enable nginx
 
 # Get the server's IP address
 SERVER_IP=$(hostname -I | awk '{print $1}')
