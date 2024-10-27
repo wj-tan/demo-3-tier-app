@@ -6,7 +6,7 @@ server {
     listen 80;
     # add here the ip address of your server
     # or a domain pointing to that ip (like example.com or www.example.com)
-    server_name <Server IP/FQDN>;
+    server_name <DB VM IP/FQDN>;
 
     keepalive_timeout 5;
     client_max_body_size 4G;
@@ -21,7 +21,7 @@ server {
         proxy_redirect off;
 
         if (!-f $request_filename) {
-            proxy_pass http://app_server;
+            proxy_pass http://127.0.0.1:8000;
             break;
         }
 }
