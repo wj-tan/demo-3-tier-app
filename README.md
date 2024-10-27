@@ -23,6 +23,15 @@ I used the following technologies for the application.
 | Programming lang. | Python 3.x                        |
 | Apps.             | FastAPI, Uvicorn, Gunicorn, Nginx |
 
+mongodb 8.0.3
+python 3.10.12
+fastpi 0.115.3
+uvicorn 0.32.0
+pydantic 2.9.2
+motor 2.5.0
+gunicorn 23.0.0
+nginx 1.18.0
+
 2. **Application VM:**
 
 | **Categories**    | **Components**                    |
@@ -31,6 +40,12 @@ I used the following technologies for the application.
 | Access Method     | Web API                           |
 | Programming lang. | Python 3.x                        |
 | Apps.             | Flask, HTML5+CSS+jQuery, Gunicorn |
+
+gunicorn 20.1.0
+python 3.10.15
+uvicorn 0.32.0 with Cpython 3.10.15
+flask 3.0.3
+requests 2.32.3
 
 3. **Web VM:**
 
@@ -41,6 +56,8 @@ I used the following technologies for the application.
 | Apps.            | Nginx          |
 | **Reasoning:**   |                |
 
+nginx 1.22.1
+
 Provided below are the reasons for choosing the technology components.
 
 - **Platform:**
@@ -50,6 +67,8 @@ Provided below are the reasons for choosing the technology components.
 | Database    | Ubuntu Server 22.04 (lts) |
 | Application | Alpine Linux 3.17.1       |
 | Web         | Alpine Linux 3.17.1       |
+
+
 
 - **Reasoning**:  
 
