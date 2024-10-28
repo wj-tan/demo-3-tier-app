@@ -1,4 +1,4 @@
 #!/bin/sh
 
-apk add nginx --no-cache
+apk add nginx --no-cache
 rc-update add nginx default
