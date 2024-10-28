@@ -57,11 +57,11 @@ Provided below are the detailed structure of the components.
 ![Architecture Diagram](https://raw.githubusercontent.com/wj-tan/demo-3-tier-app/main/architecture.png)
 
 
-**How to:**
+**Setup Guide:**
 
-Provided below are the details of the configuration. Since here I am providing all the program files, servers need to be configured as per detail below. I also plan to create a OVA file with everything pre-configured. That would not require the below configurations.
+Refer to the README page in each of the folder(/app_vm, /db_vm, web_vm) for steps to setup the VMs
 
-**Database VM:**
+**Info on Database VM:**
 
 - I have included a sample database with 500 entries. The sample data was generated using [Mockaroo.](https://www.mockaroo.com/)
   - Database Name: employees\_DB
@@ -79,19 +79,7 @@ Provided below are the details of the configuration. Since here I am providing a
     - "job\_type": str
   - In the data structure, we will auto-generate `emp_id` field. This field is not modifiable by end users. It is created while adding a new record or deleted at the time of record deletion.
   - The combination or first_name and last_name is unique. Meaning, no two employees can have same first name and last name.
-- After installing MongoDB, create a folder where you want to keep all the required files. For example, employee_db.
-- Download all the files under DB VM repository and copy it over to employee_db folder. The files under the DB VM repository are listed below:
-  - MOCK_DATA.json - contains the mock data
-  - app.py - Python file containing the application
-  - employee_database.py - Has the details on how to access the database and all the required functions to handle database operations.
-  - employee_models.py - This file defines the models for handling the data from the database. This aligns with the database collection schema.
-  - employee_routes.py - This file has all the routes for the application.
-  - requirements.txt - Has all the components needed to be installed for the application to be working.
-    - fastapi - component which creates the REST API endpoints and Swagger UI
-    - uvicorn - Uvicorn is an ASGI web server implementation for Python
-    - pydantic[email] - Data validation and settings management using Python type annotations
-    - motor - Asynchronous python driver for MongoDB
-    - gunicorn - The Gunicorn "Green Unicorn" is a Python Web Server Gateway Interface HTTP server
+
 - **Supported CRUD operations:**
 
 ```bash
