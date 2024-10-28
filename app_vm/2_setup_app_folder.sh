@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 mkdir /root/employee_app
 mkdir /root/employee_app/logs

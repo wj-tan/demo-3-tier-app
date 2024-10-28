@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 apk add python3  --no-cache
 python3 -m ensurepip  
