@@ -2,16 +2,18 @@
 
 1. Run the MongoDB installation script:
    ```bash
-   ./1_install_mongo.sh
+   sh ./1_install_mongo.sh
 2. Run the Python installation script:
    ```bash
-   ./2_install_python.sh
+   sh ./2_install_python.sh
 3. Set up the application folder:
    ```bash
-   ./3_setup_app_folder.sh
+   sh ./3_setup_app_folder.sh
 4. Install Nginx:
    ```bash
-   ./4_install_nginx.sh
-
+   sh ./4_install_nginx.sh
+5. Open the Nginx configuration file `/etc/nginx/sites-available/fastapi-mongodb-app` and modify the `server_name` directive to include your server IP or FQDN:
+```nginx
+server_name <Server IP/FQDN>;
 
 
