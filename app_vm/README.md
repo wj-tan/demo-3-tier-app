@@ -9,3 +9,4 @@
 3. Start the application:
    ```bash
    sh ./3_start_app.sh
+4. Update app.py db_fqdn variable
