@@ -52,7 +52,8 @@ Provided below are the reasons for choosing the technology components.
 **Detailed Structure:**
 Provided below are the detailed structure of the components.
 
-![App Architecture](https://user-images.githubusercontent.com/11576892/225925666-ca17696b-68dd-4510-a86b-87368fa3e7b3.gif)
+![Architecture Diagram](https://raw.githubusercontent.com/wj-tan/demo-3-tier-app/main/architecture.png)
+
 
 **How to:**
 
