@@ -19,4 +19,3 @@
 6. Start the application:
    ```
    sh ./5_start_app.sh
-
