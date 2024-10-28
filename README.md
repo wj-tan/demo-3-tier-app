@@ -8,6 +8,8 @@ This is going to be a 3-tier application. With database as backend, app server a
 
 I used the following technologies for the application.
 
+Refer to the README page in each of the folder for steps to setup the VMs
+
 1. **Database VM:**
 
 | **Category**         | **Component**                  | **Version**     |
