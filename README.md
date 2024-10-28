@@ -16,21 +16,19 @@ I used the following technologies for the application.
 
 1. **Database VM:**
 
-| **Categories**    | **Components**                    |
-|:-----------------:|:---------------------------------:|
-| Operating System  | Ubuntu Server                     |
-| Access Method     | REST API                          |
-| Programming lang. | Python 3.x                        |
-| Apps.             | FastAPI, Uvicorn, Gunicorn, Nginx |
+| **Category**         | **Component**                  | **Version**     |
+|:---------------------|:------------------------------:|:---------------:|
+| **Operating System** | Ubuntu Server                  | 22.04 (lts)     |
+| **Access Method**    | REST API                       | -               |
+| **Programming Lang.**| Python                         | 3.10.12         |
+| **Database**         | MongoDB                        | 8.0.3           |
+| **Applications**     | FastAPI                        | 0.115.3         |
+|                      | Uvicorn                        | 0.32.0          |
+|                      | Gunicorn                       | 23.0.0          |
+|                      | Nginx                          | 1.18.0          |
+|                      | Pydantic                       | 2.9.2           |
+|                      | Motor                          | 2.5.0           |
 
-mongodb 8.0.3
-python 3.10.12
-fastpi 0.115.3
-uvicorn 0.32.0
-pydantic 2.9.2
-motor 2.5.0
-gunicorn 23.0.0
-nginx 1.18.0
 
 2. **Application VM:**
 
