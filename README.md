@@ -40,34 +40,14 @@ I used the following technologies for the application.
 
 3. **Web VM:**
 
-| **Categories**   | **Components** |
-|:----------------:|:--------------:|
-| Operating System | Alpine Linux   |
-| Access Method    | Web API        |
-| Apps.            | Nginx          |
-| **Reasoning:**   |                |
+| **Category**         | **Component**                  | **Version**     |
+|:---------------------|:------------------------------:|:---------------:|
+| **Operating System** | Alpine Linux                   | -               |
+| **Access Method**    | Web API                        | -               |
+| **Applications**     | Nginx                          | 1.22.1          |
 
-nginx 1.22.1
 
 Provided below are the reasons for choosing the technology components.
-
-- **Platform:**
-
-| Tier        | OS                        |
-|:----------- |:------------------------- |
-| Database    | Ubuntu Server 22.04 (lts) |
-| Application | Alpine Linux 3.17.1       |
-| Web         | Alpine Linux 3.17.1       |
-
-
-
-- **Reasoning**:  
-
-Overall I chose Alpine linux for all other component except database VM.
-
-- MongoDB Support: Latest version of MongoDB (6.x) does not have a release for current Alpine version. Current version of Alpine linux is 3.17.x, whereas last available MongoDB version is 5.x on Alpine 3.9. Using older versions will force me to use older versions for all the other component. This is undesirable and increases complexity. Using Ubuntu as OS increased the overall footprint but gain outweighs the disadvantage here.
-
-- Size of the VM: Alpine linux is much smaller in size in comparison with Ubuntu VM. This suits perfectly the app and the web vm's but for database vm we need more libraries. With all the libraries size becomes considerably larger for Alpine Linux. Hence Ubuntu was chosen as DB VM.
 
 **Detailed Structure:**
 Provided below are the detailed structure of the components.
