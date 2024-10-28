@@ -14,10 +14,4 @@
    sh ./4_install_nginx.sh
 5. Open the Nginx configuration file `/etc/nginx/sites-available/fastapi-mongodb-app` and modify the `user` `server_name` directive to include your DB IP or FQDN:
    ```nginx
-   upstream app_server {
-    server unix:/home/user/employee_db/run/gunicorn.sock fail_timeout=0;
-   }
    server_name <DB IP/FQDN>;
-   
-
-
