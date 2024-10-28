@@ -1,10 +1,4 @@
-**Purpose:**
-
-I work as a multi-cloud solution architect and as part of the job, often times, I give demos to customers or build specific use cases for them. While doing so I am always looking for an application which is lightweight, is useful (replicates real life use case) and uses 3-tier application architecture (most commonly used architecture).
-
-I searched for such an application but could not find any, which, suits my requirement. So, I decided **write one myself**. This is the first version of the application. I will provide details of the application here and the required files are also provided here.
-
-Feel free to use, make changes as necessary. Do let me know if you have questions or have modifications in mind.
+A fork from [Github repository](https://github.com/sajaldebnath/demo-3-tier-app)
 
 **Application Structure:**
 
@@ -32,18 +26,17 @@ I used the following technologies for the application.
 
 2. **Application VM:**
 
-| **Categories**    | **Components**                    |
-|:-----------------:|:---------------------------------:|
-| Operating System  | Alpine Linux                      |
-| Access Method     | Web API                           |
-| Programming lang. | Python 3.x                        |
-| Apps.             | Flask, HTML5+CSS+jQuery, Gunicorn |
+| **Category**         | **Component**                  | **Version**     |
+|:---------------------|:------------------------------:|:---------------:|
+| **Operating System** | Alpine Linux                   | -               |
+| **Access Method**    | Web API                        | -               |
+| **Programming Lang.**| Python,HTML5+CSS+jQuery        | 3.10.15         |
+| **Applications**     | Flask                          | 3.0.3           |
+|                      |               | -               |
+|                      | Gunicorn                       | 20.1.0          |
+|                      | Uvicorn (with CPython)         | 0.32.0          |
+|                      | Requests                       | 2.32.3          |
 
-gunicorn 20.1.0
-python 3.10.15
-uvicorn 0.32.0 with Cpython 3.10.15
-flask 3.0.3
-requests 2.32.3
 
 3. **Web VM:**
 
@@ -126,202 +119,6 @@ POST /employee: to create a new employee record
 PUT /employee/<emp_id>: to update an employee record by employee ID
 DELETE /employee/<emp_id>: to delete an employee record by employee ID
 ```
-
-- Before we start the application we need to import the data into MongoDB database. From Ubuntu terminal go to the folder where you downloaded all the files (e.g.  /home/user/employee_db) and run the following command:
-
-```bash
-`mongoimport --db=employees_DB --collection=employees --file=./MOCK_DATA.json --jsonArray`
-```
-
-- Next, we will set emp_id as unique and the combination of first_name and last_name as unique. So that we cannot have duplicates in these fields. For this we will log into mongsh from the terminal.
-
-```bash
-`mongosh`  
-`use employees_DB`  
-`db.employees.createIndex( { "emp_id": 1}, { unique: true} )`   
-`db.employees.createIndex( {  first_name: 1, last_name: 1 }, { unique: true } )`
-```
-
-- Running NGINX+ GUNICORN + UVICORN in DB VM**. Note, the following configurations assume you have an existing user by name "user" present in the Ubuntu VM. Otherwise, replace it with your user id.
-
-```bash
-sudo apt install supervisor nginx -y
-sudo systemctl enable supervisor
-sudo systemctl start supervisor
-nano /home/user/employee_db/gunicorn_start
-```
-
-```bash
- #!/bin/bash
-
-NAME=fastapi-mongodb-app
-DIR=/home/user/employee_db
-USER=user # This is the user id with which you are installing everything
-GROUP=user
-WORKERS=3
-WORKER_CLASS=uvicorn.workers.UvicornWorker
-BIND=unix:$DIR/run/gunicorn.sock
-LOG_LEVEL=error
-
-cd $DIR
-
-exec gunicorn app:app \
-  --name $NAME \
-  --workers $WORKERS \
-  --worker-class $WORKER_CLASS \
-  --user=$USER \
-  --group=$GROUP \
-  --bind=$BIND \
-  --log-level=$LOG_LEVEL \
-  --log-file=-
-```
-
-```bash
-chmod u+x gunicorn_start
-cd /home/user/employee_dbmkdir run
-mkdir logs
-sudo nano /etc/supervisor/conf.d/fastapi-mongodb-app.conf
-
-[program:fastapi-mongodb-app]
-
-command=/home/user/employee_db/gunicorn_start
-user=user
-autostart=true
-autorestart=true
-redirect_stderr=true
-stdout_logfile=/home/user/mongodb/logs/gunicorn-error.log
-
-
-sudo supervisorctl reread
-sudo supervisorctl update
-```
-
-To update code:
-
-```bash
-sudo supervisorctl restart fastapi-app
-```
-
-- **Configure NGINIX:**
-
-```bash
-sudo nano /etc/nginx/sites-available/fastapi-mongodb-app
-
-upstream app_server {
-    server unix:/home/user/employee_db/run/gunicorn.sock fail_timeout=0;
-}
-
-server {
-    listen 80;
-    # add here the ip address of your server
-    # or a domain pointing to that ip (like example.com or www.example.com)
-    server_name <Server IP/FQDN>;
-
-    keepalive_timeout 5;
-    client_max_body_size 4G;
-
-    access_log /home/user/employee_db/logs/nginx-access.log;
-    error_log /home/user/employee_db/logs/nginx-error.log;
-
-    location / {
-
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header Host $http_host;
-        proxy_redirect off;
-
-        if (!-f $request_filename) {
-            proxy_pass http://app_server;
-            break;
-        }
-}
-}
-
-
-sudo ln -s /etc/nginx/sites-available/fastapi-mongodb-app /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl restart nginx
-```
-
-**Note**: Change the user in `/etc/nginx/nginx.conf` from `www-data` to `"user"`.
-
-**Application VM:**
-
-- Deploy an Alpine linux VM.
-- Install the dependencies:
-  - Install flask:
-
-```bash
-apk add python3  --no-cache
-python3 -m ensurepip  
-pip3 install --upgrade pip
-pip3 install flask  
-```
-
-- Install gunicorn
-
-```bash
-apk add py3-gunicorn  --no-cache
-```
-
-- Create a folder `/root/employee\_app`
-- Copy all the files including the structure inside `/root/employee\_app` folder
-- Run gunicorn server as service in Alpine:
-
-```bash
-vi /etc/local.d/gunicorn.start
-
-#!/bin/sh
-cd /root/employee_app
-nohup /usr/bin/gunicorn --bind 0.0.0.0:8080 app:app  &
-chmod 755 /etc/local.d/gunicorn.start
-```
-
-- Reboot the server. Now the application is available on `<http://<app-vm-ip>:8080>`
-
-**Web VM:**
-
-- Deploy an Alpine linux VM.
-- Install Nginix:
-
-```bash
-apk add nginx  --no-cache
-rc-update add nginx default
-```
-
-- Configure Nginix as reverse proxy:
-
-```bash
-vi  /etc/nginx/http.d/default.conf
-
-# This is a default site configuration which will simply return 404, preventing
-# chance access to any other virtualhost.
-
-server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-        server_name <web-server-ip or fqdn>;
-        # Everything is a 404
-        location / {
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header Host $http_host;
-                proxy_redirect off;
-
-                if (!-f $request_filename) {
-                        proxy_pass http://<app-server-ip or fqdn>:8080;
-                        break;
-                }
-                #return 404;
-        }
-
-        # You may need this to prevent return 404 recursion.
-        location = /404.html {
-                internal;
-        }
-}
-```
-
-Now the application can be accessed by going to `<http://<web-server-ip> or fqdn>` Swagger UI is available for DB at `<http://<db-vm-ip> or fqdn>/docs `or `<http://<db-vm-ip> or fqdn>/redoc`
-
 **Sample Screenshots**
 
 Provided below are few sample screenshots.
@@ -334,6 +131,3 @@ Provided below are few sample screenshots.
 
 ![App Screenshots](https://user-images.githubusercontent.com/11576892/226115529-2eec25bd-1746-47f1-a7f3-4c92d2f8fb5e.gif)
 
-The application UI is self explanatory. Explore the options and hope you will like it.
-
-Get the application from [Github repository](https://github.com/sajaldebnath/demo-3-tier-app)
