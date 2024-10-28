@@ -1,5 +1,5 @@
 upstream app_server {
-    server unix:/home/user/employee_db/run/gunicorn.sock fail_timeout=0;
+    server unix:/root/employee_db/run/gunicorn.sock fail_timeout=0;
 }
 
 server {
