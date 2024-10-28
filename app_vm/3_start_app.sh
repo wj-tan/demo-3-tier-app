@@ -14,4 +14,4 @@ else
     echo "No Gunicorn process found."
 fi
 
-nohup /usr/bin/gunicorn --bind 0.0.0.0:8080 app:app  &
+nohup gunicorn --bind 0.0.0.0:8080 app:app  &
