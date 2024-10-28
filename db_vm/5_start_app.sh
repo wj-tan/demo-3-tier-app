@@ -5,7 +5,7 @@ cd /root/employee_db
 # Find the Gunicorn process ID (PID)
 PID=$(pgrep gunicorn)
 
-# Check if Gunicorn is running
+# Check if any Gunicorn process is running
 if [ -n "$PID" ]; then
     echo "Killing Gunicorn process with PID: $PID"
     kill -9 $PID
