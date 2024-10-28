@@ -1,26 +1,18 @@
 #!/bin/sh
 
-NAME=fastapi-mongodb-app
-DIR=/root/employee_db
-USER=root # This is the user id with which you are installing everything
-GROUP=root
-WORKERS=3
-WORKER_CLASS=uvicorn.workers.UvicornWorker
-BIND=unix:$DIR/run/gunicorn.sock
-LOG_LEVEL=error
+cd /root/employee_db
 
-#cd /root/employee_db
+# Find the Gunicorn process ID (PID)
+PID=$(pgrep gunicorn)
 
-cd $DIR
-
-# exec nohup gunicorn app:app \
-#   --workers $WORKERS \
-#   --worker-class $WORKER_CLASS \
-#   --user=$USER \
-#   --group=$GROUP \
-#   --bind=$BIND \
-#   --log-level=$LOG_LEVEL \
-#   --log-file=- &
+# Check if Gunicorn is running
+if [ -n "$PID" ]; then
+    echo "Killing Gunicorn process with PID: $PID"
+    kill -9 $PID
+    echo "Gunicorn process terminated."
+else
+    echo "No Gunicorn process found."
+fi
 
 nohup gunicorn -k uvicorn.workers.UvicornWorker app:app --bind 0.0.0.0:8000 &
 
