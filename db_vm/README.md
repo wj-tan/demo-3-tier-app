@@ -15,3 +15,8 @@
 5. Open the Nginx configuration file `/etc/nginx/sites-available/fastapi-mongodb-app` and modify the `user` `server_name` directive to include your DB IP or FQDN:
    ```nginx
    server_name <DB IP/FQDN>;
+
+6. Start the application:
+   ```
+   sh ./5_start_app.sh
+
