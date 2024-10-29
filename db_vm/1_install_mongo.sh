@@ -52,10 +52,10 @@ curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
 # Create the MongoDB repo file for RHEL
 echo "[mongodb-org-8.0]
 name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/redhat/\$releasever/mongodb-org/8.0/x86_64/
-gpgcheck=0
+baseurl=https://repo.mongodb.org/yum/redhat/9/mongodb-org/8.0/x86_64/
+gpgcheck=1
 enabled=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mongodb-org-8.0" | sudo tee /etc/yum.repos.d/mongodb-org-8.0.repo
+gpgkey=https://pgp.mongodb.com/server-8.0.asc" | sudo tee /etc/yum.repos.d/mongodb-org-8.0.repo
 
 # Update package lists and install MongoDB
 sudo dnf install -y mongodb-org
