@@ -1,3 +1,4 @@
+: '
 #!/bin/sh
 
 sudo apt-get install gnupg curl
@@ -36,10 +37,9 @@ db.employees.createIndex({ "first_name": 1, "last_name": 1 }, { unique: true })
 EOF
 
 echo "MongoDB setup and data import completed."
-
+'
 
 # Rhel Version
-: '
 #!/bin/sh
 
 # Install prerequisites
@@ -84,4 +84,3 @@ db.employees.createIndex({ "first_name": 1, "last_name": 1 }, { unique: true })
 EOF
 
 echo "MongoDB setup and data import completed."
-'
