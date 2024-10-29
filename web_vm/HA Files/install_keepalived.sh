@@ -2,4 +2,5 @@
 
 apk add keepalived
 mkdir /etc/keepalived
-rc-update add keepalived default
+#rc-update add keepalived default
+systemctl enable keepalived
