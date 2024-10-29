@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /root/employee_db
+cd /root/employee_db/app
 
 # Find the Gunicorn process ID (PID)
 PID=$(pgrep gunicorn)
