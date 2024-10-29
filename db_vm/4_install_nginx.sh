@@ -14,6 +14,7 @@ sudo systemctl enable nginx
 SERVER_IP=$(hostname -I | awk '{print $1}')
 NGINX_CONF="/etc/nginx/nginx.conf"
 mkdir /etc/nginx/sites-available
+mkdir /etc/nginx/sites-enabled
 CONFIG_FILE_FOLDER="/etc/nginx/sites-available"
 
 # Create Nginx configuration for FastAPI
