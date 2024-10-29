@@ -59,7 +59,7 @@ cp /root/demo-3-tier-app/db_vm/fastapi-mongodb-app $CONFIG_FILE_FOLDER/fastapi-m
 sed -i 's/^user www-data;/user root;/' "$NGINX_CONF"
 
 echo "Enabling the Nginx configuration..."
-sudo ln -s $CONFIG_FILE_FOLDER/fastapi-mongodb-app $CONFIG_FILE_FOLDER
+sudo ln -s $CONFIG_FILE_FOLDER/fastapi-mongodb-app /etc/nginx/sites-enabled/
 
 # Test Nginx configuration
 echo "Testing Nginx configuration..."
