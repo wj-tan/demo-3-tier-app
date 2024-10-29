@@ -4,6 +4,10 @@
 echo "Installing Nginx..."
 sudo apt update
 sudo apt install -y nginx
+
+# Rhel version
+#sudo dnf install -y nginx
+
 sudo systemctl enable nginx
 
 # Get the server's IP address
@@ -55,7 +59,7 @@ cp /root/demo-3-tier-app/db_vm/fastapi-mongodb-app $CONFIG_FILE_FOLDER/fastapi-m
 sed -i 's/^user www-data;/user root;/' "$NGINX_CONF"
 
 echo "Enabling the Nginx configuration..."
-sudo ln -s $CONFIG_FILE_FOLDER/fastapi-mongodb-app $
+sudo ln -s $CONFIG_FILE_FOLDER/fastapi-mongodb-app $CONFIG_FILE_FOLDER
 
 # Test Nginx configuration
 echo "Testing Nginx configuration..."
