@@ -6,3 +6,4 @@ mkdir /etc/keepalived
 systemctl enable keepalived
 
 sudo firewall-cmd --permanent --add-protocol=vrrp
+sudo firewall-cmd --reload
