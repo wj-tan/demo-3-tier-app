@@ -60,6 +60,7 @@ firewall-cmd --permanent --add-port=80/tcp
 firewall-cmd --permanent --add-port=443/tcp
 firewall-cmd --permanent --add-port=8000/tcp
 firewall-cmd --permanent --add-port=8080/tcp
+firewall-cmd --permanent --add-port=27017/tcp
 firewall-cmd --reload
 
 # Use sed to replace 'user www-data;' with 'user root;'
