@@ -55,7 +55,12 @@ cp /root/demo-3-tier-app/db_vm/fastapi-mongodb-app $CONFIG_FILE_FOLDER/fastapi-m
 
 # Enable the configuration
 
-
+# Open Firewall ports
+firewall-cmd --permanent --add-port=80/tcp
+firewall-cmd --permanent --add-port=443/tcp
+firewall-cmd --permanent --add-port=8000/tcp
+firewall-cmd --permanent --add-port=8080/tcp
+firewall-cmd --reload
 
 # Use sed to replace 'user www-data;' with 'user root;'
 sed -i 's/^user www-data;/user root;/' "$NGINX_CONF"
