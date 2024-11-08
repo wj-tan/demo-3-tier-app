@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/employee_app
+ExecStart=/usr/local/bin/gunicorn --bind 0.0.0.0:8080 app:app
+Restart=on-failure
+RestartSec=5
+StartLimitIntervalSec=30
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
