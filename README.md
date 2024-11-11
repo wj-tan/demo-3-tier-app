@@ -54,7 +54,7 @@ Provided below are the reasons for choosing the technology components.
 **Detailed Structure:**
 Provided below are the detailed structure of the components.
 
-![Architecture Diagram](https://raw.githubusercontent.com/wj-tan/demo-3-tier-app/main/architecture.png)
+![Architecture Diagram](https://raw.githubusercontent.com/wj-tan/demo-3-tier-app/rhel/architecture_diagram_v2.5.png)
 
 
 **Setup Guide:**
